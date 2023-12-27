@@ -1,6 +1,10 @@
-import { createReducer } from '@reduxjs/toolkit';
-import { Message } from '../../types';
-import { AddMessageActon, DeleteMessageAction, UpdateMessageAction } from '../actions';
+import { createReducer } from "@reduxjs/toolkit";
+import { Message } from "../../types";
+import {
+  AddMessageActon,
+  DeleteMessageAction,
+  UpdateMessageAction,
+} from "../actions";
 
 export type MessagesType = {
   messages: Message[];
@@ -9,7 +13,7 @@ export type MessagesType = {
 
 const INIT_STATE: MessagesType = {
   messages: [],
-  position: 'top',
+  position: "top",
 };
 
 export const messagesRedcuer = createReducer(INIT_STATE, (builder) => {
@@ -21,6 +25,8 @@ export const messagesRedcuer = createReducer(INIT_STATE, (builder) => {
       state.messages = [];
     })
     .addCase(DeleteMessageAction, (state, action) => {
-      state.messages = [];
+      state.messages = state.messages.filter(
+        (message) => message.id !== action.payload.id
+      );
     });
 });

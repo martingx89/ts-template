@@ -2,9 +2,13 @@ import React from "react";
 import "./App.css";
 import { Message } from "./types";
 import { useAppSelector, useAppDispatch } from "./store/store";
-import { AddMessageActon, DeleteMessageAction, UpdateMessageAction } from "./store/actions";
+import {
+  AddMessageActon,
+  DeleteMessageAction,
+  UpdateMessageAction,
+} from "./store/actions";
 import { selectMessages } from "./store/selectors";
-import shortid from 'shortid';
+import shortid from "shortid";
 
 const App = () => {
   const { messages } = useAppSelector(selectMessages);
@@ -16,12 +20,13 @@ const App = () => {
   };
 
   const deleteMessage = (message: Message) => {
-    dispatch(DeleteMessageAction(message))
-  }
+    dispatch(DeleteMessageAction(message));
+    console.log(message)
+  };
 
   const updateMessage = (message: Message) => {
-    dispatch(UpdateMessageAction(message))
-  }
+    dispatch(UpdateMessageAction(message));
+  };
 
   return (
     <div className="App">
@@ -39,6 +44,7 @@ const App = () => {
       {messages.map((el) => (
         <div key={el.id}>
           <p>{el.text}</p>
+          <button onClick={() => deleteMessage(el)}>Delete</button>
         </div>
       ))}
     </div>
