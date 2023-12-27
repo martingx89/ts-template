@@ -8,7 +8,7 @@ import {
   UpdateMessageAction,
 } from "./store/actions";
 import { selectMessages } from "./store/selectors";
-import shortid from "shortid";
+import { v4 as uuidv4 } from "uuid";
 
 const App = () => {
   const { messages } = useAppSelector(selectMessages);
@@ -33,7 +33,7 @@ const App = () => {
       <button
         onClick={() =>
           addMessage({
-            id: shortid.generate(),
+            id: uuidv4(),
             level: "info",
             text: "info",
           })
